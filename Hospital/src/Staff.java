@@ -1,25 +1,8 @@
-public class Staff {
-    private String id;
-    private String name;
+public class Staff extends Person {
     private String role;
     public Staff(String id, String name, String role) {
-        this.id = id;
-        this.name = name;
+        super(name, id);
         this.role = role;
-    }
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getRole() {
@@ -29,5 +12,8 @@ public class Staff {
     public void setRole(String role) {
         this.role = role;
     }
-
+    @Override
+    public void displayDetails() {
+        System.out.println("Staff Name: " + name + ", ID: " + id + ", Role: " + role);
+    }
 }
