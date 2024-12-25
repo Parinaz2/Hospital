@@ -1,12 +1,20 @@
 public class Patient extends Person {
     private String bimari;
     private int roomNumber;
-    public Patient(String id,String name,String bimari,int roomNumber){
+    private int age;
+    public Patient(String id,String name,String bimari,int roomNumber , int age){
         super(name,id);
         this.bimari=bimari;
         this.roomNumber=roomNumber;
+        this.age=age;
+    }
+    public int getAge() {
+        return age;
     }
 
+    public void setAge(int age) {
+        this.age = age;
+    }
     public String getBimari(){
         return bimari;
     }
