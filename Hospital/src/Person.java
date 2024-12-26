@@ -16,4 +16,6 @@ abstract class Person {
     }
 
     public abstract void displayDetails();
+    public abstract void Details();
+
 }
