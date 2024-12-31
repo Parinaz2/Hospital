@@ -44,19 +44,5 @@ public class Room {
         System.out.println("Room Type: " + roomType);
         System.out.println("Occupied: " + (isAvailaible ? "Yes" : "No"));
     }
-    public void addToDatabase() {
-        try (Connection connection = DatabaseManager.getConnection()) {
-            String query = "INSERT INTO rooms (roomId, isAvailable) VALUES (?, ?)";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, roomId);
-            preparedStatement.setBoolean(2, isAvailaible);
 
-            int result = preparedStatement.executeUpdate();
-            if (result > 0) {
-                System.out.println("Room added successfully!");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }

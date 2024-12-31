@@ -6,7 +6,9 @@ abstract class Person {
         this.name = name;
         this.id = id;
     }
-
+    public Person(String name) {
+        this.name = name;
+    }
     public String getName() {
         return name;
     }
