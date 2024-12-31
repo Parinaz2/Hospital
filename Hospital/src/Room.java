@@ -1,21 +1,24 @@
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.Connection;
 public class Room {
-    private String roomId;
+    private int roomId;
     private String roomType;
     private boolean isAvailaible;
 
     // Constructor
-    public Room(String roomId, String roomType, boolean isAvailaible) {
+    public Room(int roomId, String roomType, boolean isAvailaible) {
         this.roomId = roomId;
         this.roomType = roomType;
         this.isAvailaible = isAvailaible;
     }
 
     // Getter and Setter Methods
-    public String getRoomId() {
+    public int getRoomId() {
         return roomId;
     }
 
-    public void setRoomId(String roomId) {
+    public void setRoomId(int roomId) {
         this.roomId = roomId;
     }
 
@@ -41,29 +44,19 @@ public class Room {
         System.out.println("Room Type: " + roomType);
         System.out.println("Occupied: " + (isAvailaible ? "Yes" : "No"));
     }
-//    private int roomNumber;
-//    private boolean isAvailaible;
-//    public Room(int roomNumber) {
-//        this.roomNumber = roomNumber;
-//        //اول اتاق خالیه
-//        this.isAvailaible = false;
-//
-//    }
-//    //چون شماره اتاق تغییر نمیکند و موقع شی ساختن ثابته پس نیازی به تغییر شماره اتاق بعد از شی ساختن نیس و setter نیست
-//    public int getRoomNumber() {
-//        return roomNumber;
-//    }
-//    //قراره که تغییر بکنه ولی چون از متد استفاده کردیم نیازی نیست به setter
-//    public boolean isAvailaible() {
-//        return isAvailaible;
-//    }
-//    // متد برای اشغال کردن اتاق
-//    public void full() {
-//        isAvailaible = true;
-//    }
-//
-//    // متد برای آزاد کردن اتاق
-//    public void empty() {
-//        isAvailaible = false;
-//    }
+    public void addToDatabase() {
+        try (Connection connection = DatabaseManager.getConnection()) {
+            String query = "INSERT INTO rooms (roomId, isAvailable) VALUES (?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, roomId);
+            preparedStatement.setBoolean(2, isAvailaible);
+
+            int result = preparedStatement.executeUpdate();
+            if (result > 0) {
+                System.out.println("Room added successfully!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
