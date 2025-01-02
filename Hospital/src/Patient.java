@@ -58,6 +58,7 @@ public class Patient extends Person {
         }
     }
 
+
     @Override
     public void displayDetails() {
         System.out.println("Patient Name: " + name + "\n"+

@@ -1,3 +1,8 @@
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Scanner;
+
 public class Staff extends Person {
     private String role;
     private String department;
@@ -6,7 +11,11 @@ public class Staff extends Person {
         this.role = role;
         this.department=department;
     }
-
+    public Staff(String name, String role,String department) {
+        super(name);
+        this.role = role;
+        this.department=department;
+    }
     public String getRole() {
         return role;
     }
@@ -17,7 +26,18 @@ public class Staff extends Person {
     public String getDepartment() {
         return department;
     }
-
+    public void saveToDatabase(Connection conn) {
+        String sql = "INSERT INTO staff (name, role, department) VALUES (?, ?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, this.name);
+            stmt.setString(2, this.role);
+            stmt.setString(3, this.department);
+            stmt.executeUpdate();
+            System.out.println("Staff added successfully.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public void setDepartment(String department) {
         this.department = department;
     }
