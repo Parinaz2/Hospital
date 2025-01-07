@@ -57,8 +57,6 @@ public class Patient extends Person {
             e.printStackTrace();
         }
     }
-
-
     @Override
     public void displayDetails() {
         System.out.println("Patient Name: " + name + "\n"+
