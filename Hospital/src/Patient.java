@@ -1,10 +1,15 @@
 import java.sql.*;
 
 public class Patient extends Person {
+    private  int admissionHour;
     private String bimari;
     private int roomNumber;
     private int age;
     private int national_id;
+    public Patient(String id,String name,int admissionHour){
+        super(name,id);
+        this.admissionHour=admissionHour;
+    }
     public Patient(String id,String name,String bimari,int roomNumber , int age){
         super(name,id);
         this.bimari=bimari;
@@ -17,6 +22,10 @@ public class Patient extends Person {
         this.roomNumber=roomNumber;
         this.age=age;
         this.national_id=national_id;
+    }
+
+    public int getAdmissionHour() {
+        return admissionHour;
     }
 
     public Patient(String name) {
@@ -95,15 +104,15 @@ public class Patient extends Person {
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, nationalId);
-            ResultSet rs = stmt.executeQuery();
+           ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
                 String name = rs.getString("name");
                 int age = rs.getInt("age");
                 int roomNumber = rs.getInt("roomNumber");
                 String bimari = rs.getString("bimari");
-                String nationalIdFromDb = rs.getString("national_id");
-                return new Patient( name, nationalIdFromDb, bimari ,  roomNumber , age);
+                int nationalIdFromDb = rs.getInt("national_id");
+                return new Patient( name, bimari ,  roomNumber , age, nationalIdFromDb);
             } else {
                 System.out.println("not found");
                 return null; // No patient found with the given National ID
