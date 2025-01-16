@@ -61,14 +61,6 @@ public class Patient extends Person {
         super();
     }
    public  void saveToDatabase(Connection conn) {
-       if (name == null || name.trim().isEmpty()) {
-           throw new IllegalArgumentException("Name cannot be null or empty.");
-       }
-       if (bimari == null || bimari.trim().isEmpty()) {
-           throw new IllegalArgumentException("Illness cannot be null or empty.");
-       }
-
-
         String sql = "INSERT INTO patients (name, age, roomNumber, bimari , national_id) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, this.name);

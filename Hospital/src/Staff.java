@@ -24,6 +24,11 @@ public class Staff extends Person {
         this.department=department;
         this.national_id=national_id;
     }
+
+    public Staff() {
+        super();
+    }
+
     public int getNational_id(){
         return national_id;
     }
