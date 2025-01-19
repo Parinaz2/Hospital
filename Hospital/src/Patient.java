@@ -75,44 +75,6 @@ public class Patient extends Person {
         }
     }
 
- /* public void saveToDatabase(Connection conn) {
-     String checkRoomSql = "SELECT room_id, is_available FROM rooms WHERE room_number = ?";
-
-     try (PreparedStatement checkStmt = conn.prepareStatement(checkRoomSql)) {
-         checkStmt.setInt(1, this.roomNumber);
-         ResultSet rs = checkStmt.executeQuery();
-
-         if (rs.next() && rs.getBoolean("is_available")) {
-             int roomId = rs.getInt("room_id"); // دریافت شناسه اتاق
-
-             // اگر اتاق در دسترس است، بیمار را اضافه می‌کنیم
-             String sql = "INSERT INTO patients (name, age, roomNumber, bimari, national_id) VALUES (?, ?, ?, ?, ?)";
-             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                 stmt.setString(1, this.name);
-                 stmt.setInt(2, this.age);
-                 stmt.setInt(3, this.roomNumber); // استفاده از شماره اتاق
-                 stmt.setString(4, this.bimari);
-                 stmt.setInt(5, this.national_id);
-                 stmt.executeUpdate();
-                 System.out.println("Patient added successfully.");
-
-                 // به‌روزرسانی وضعیت اتاق به "اشغال"
-                 String updateRoomSql = "UPDATE rooms SET is_available = FALSE WHERE room_id = ?";
-                 try (PreparedStatement updateRoomStmt = conn.prepareStatement(updateRoomSql)) {
-                     updateRoomStmt.setInt(1, roomId);
-                     updateRoomStmt.executeUpdate();
-                     System.out.println("Room " + this.roomNumber + " is now occupied.");
-                 }
-             }
-         } else {
-             // اگر اتاق در دسترس نیست
-             System.out.println("Room " + this.roomNumber + " is not available.");
-         }
-     } catch (SQLException e) {
-         e.printStackTrace();
-     }
- } */
-
     public static boolean deletePatientByNationalId(String nationalId) {
         String sql = "DELETE FROM patients WHERE national_id = ?";
 
