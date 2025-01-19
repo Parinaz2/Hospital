@@ -112,8 +112,6 @@ public class Patient extends Person {
          e.printStackTrace();
      }
  } */
- 
- 
 
     public static boolean deletePatientByNationalId(String nationalId) {
         String sql = "DELETE FROM patients WHERE national_id = ?";
@@ -127,7 +125,7 @@ public class Patient extends Person {
             // اجرای دستور DELETE
             int rowsAffected = preparedStatement.executeUpdate();
 
-            // بررسی حذف موفق
+            // بررسی حذف
             if (rowsAffected > 0) {
                 System.out.println("Patient with National ID " + nationalId + " has been deleted.");
                 return true;

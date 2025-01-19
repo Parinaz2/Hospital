@@ -84,7 +84,32 @@ public class Staff extends Person {
             return null;
         }
     }
+    public static boolean deleteStaffByNationalId(String nationalId) {
+        String sql = "DELETE FROM staff WHERE national_id = ?";
 
+        try (Connection connection = DatabaseManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            // مقداردهی به پارامتر کد ملی
+            preparedStatement.setString(1, nationalId);
+
+            // اجرای دستور DELETE
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            // بررسی حذف
+            if (rowsAffected > 0) {
+                System.out.println("Staff with National ID " + nationalId + " has been deleted.");
+                return true;
+            } else {
+                System.out.println("No staff found with National ID " + nationalId + ".");
+                return false;
+            }
+
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+            return false;
+        }
+    }
     public String toString() {
         return "Name: " + name + ", Role: " + role +", Department: " +department+
                 ", National ID: " + national_id ;
